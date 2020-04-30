@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>All profiles</title>
+{% endblock %}
+
+{% block body %}
+
+    <br>
+    <div class="container">
+        <h1>Profiles</h1>
+
+        {% for profile in profiles %}
+            <div class="card">
+                <div class="card-header">
+                    <b>Username: </b>{{ profile.username }}
+                </div>
+                <div class="card-body">
+                    <b>First name: </b>{{ profile.first_name }}
+                    <br>
+                    <b>Last name: </b>{{ profile.last_name }}
+                    <br>
+                    <b>Email: </b>{{ profile.email }}
+                    <br>
+                    <b>Group: </b>{{ profile.groups.get }}
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-secondary" href="{% url 'profile' id=profile.id %}">View Profile</a>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+
+    </div>
+{% endblock %}

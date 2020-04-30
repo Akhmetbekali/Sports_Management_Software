@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Edit Club</title>
+{% endblock %}
+
+{% block body %}
+    <br>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <h1>Edit club</h1>
+            {% load crispy_forms_tags %}
+            {% if current_user.groups.get.name == "manager" %}
+                {{ form|crispy }}
+            {% else %}
+                {% for field in form %}
+                    {% if field.name == 'leader' %}
+                        {{ field.as_hidden }}
+                    {% else %}
+                        <div class="fieldWrapper">
+                            {{ field.errors }}
+                            {{ field|as_crispy_field }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

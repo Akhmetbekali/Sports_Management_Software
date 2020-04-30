@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>All clubs</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h1>Clubs</h1>
+        {% for club in clubs %}
+            <div class="card">
+                <div class="card-header">
+                    <b>Name: </b>{{ club.club_name }}
+                </div>
+                <div class="card-body">
+                    <b>Leader: </b>{{ club.leader }}
+                    <br>
+                    <b>Description: </b>{{ club.club_description }}
+                    <br>
+                    <b>Schedule: </b>{{ club.club_schedule }}
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-secondary" href="{% url 'club_page' id=club.id %}">View Club</a>
+
+                    {% if current_user.groups.get.name == "manager" %}
+                        <a class="btn btn-secondary" href="{% url 'delete_club' id=club.id %}">Delete Club</a>
+                    {% endif %}
+                </div>
+            </div>
+
+
+
+
+        {% endfor %}
+    </div>
+{% endblock %}
